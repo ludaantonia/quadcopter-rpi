@@ -1,13 +1,8 @@
-import RPi.GPIO as GPIO
 from gpiozero import Motor
 import pygame
 
 # motor setup
-GPIO.setmode(GPIO.BOARD)
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
-
-c1 = Motor(port1, port2)
+c1 = Motor(forward=23, backward=24)
 c2 = Motor(port1, port2)
 ccw1 = Motor(port1, port2)
 ccw2 = Motor(port1, port2)
@@ -74,8 +69,11 @@ while True:
 
     # quit
     if joystick.get_button(0):
+        c1.forward(0)
+        c2.forward(0)
+        ccw1.backward(0)
+        ccw2.backward(0) 
         print("quit program")
-        GPIO.cleanup()
         break
 
     # translation
