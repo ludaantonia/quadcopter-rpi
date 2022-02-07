@@ -132,7 +132,7 @@ def setTranslationValue(x, y, t):
             GPIO.output(c1a, GPIO.HIGH)
             GPIO.output(c1b, GPIO.LOW)
             GPIO.output(c1, GPIO.HIGH)
-            pwmc1.ChangeDutyCycle(t*70)
+            pwmc1.ChangeDutyCycle(t*x*100)
 
             GPIO.output(c2a, GPIO.HIGH)
             GPIO.output(c2b, GPIO.LOW)
@@ -147,7 +147,7 @@ def setTranslationValue(x, y, t):
             GPIO.output(ccw2a, GPIO.LOW)
             GPIO.output(ccw2b, GPIO.HIGH)
             GPIO.output(ccw2, GPIO.HIGH)
-            pwmccw2.ChangeDutyCycle(t*70)
+            pwmccw2.ChangeDutyCycle(t*x*100)
             
         elif x < 0:
             GPIO.output(c1a, GPIO.HIGH)
@@ -158,12 +158,12 @@ def setTranslationValue(x, y, t):
             GPIO.output(c2a, GPIO.HIGH)
             GPIO.output(c2b, GPIO.LOW)
             GPIO.output(c2, GPIO.HIGH)
-            pwmc2.ChangeDutyCycle(t*70)
+            pwmc2.ChangeDutyCycle(t*x*100)
 
             GPIO.output(ccw1a, GPIO.LOW)
             GPIO.output(ccw1b, GPIO.HIGH)
             GPIO.output(ccw1, GPIO.HIGH)
-            pwmccw1.ChangeDutyCycle(t*70)
+            pwmccw1.ChangeDutyCycle(t*x*100)
 
             GPIO.output(ccw2a, GPIO.LOW)
             GPIO.output(ccw2b, GPIO.HIGH)
@@ -171,11 +171,14 @@ def setTranslationValue(x, y, t):
             pwmccw2.ChangeDutyCycle(t*100)
             
     elif abs(x) < abs(y):
+        low = 60 + (y*100)
+        if low > 100:
+            low = 100
         if y > 0:
             GPIO.output(c1a, GPIO.HIGH)
             GPIO.output(c1b, GPIO.LOW)
             GPIO.output(c1, GPIO.HIGH)
-            pwmc1.ChangeDutyCycle(t*70)
+            pwmc1.ChangeDutyCycle(t*y*100)
 
             GPIO.output(c2a, GPIO.HIGH)
             GPIO.output(c2b, GPIO.LOW)
@@ -185,7 +188,7 @@ def setTranslationValue(x, y, t):
             GPIO.output(ccw1a, GPIO.LOW)
             GPIO.output(ccw1b, GPIO.HIGH)
             GPIO.output(ccw1, GPIO.HIGH)
-            pwmccw1.ChangeDutyCycle(t*70)
+            pwmccw1.ChangeDutyCycle(t*y*100)
 
             GPIO.output(ccw2a, GPIO.LOW)
             GPIO.output(ccw2b, GPIO.HIGH)
@@ -201,7 +204,7 @@ def setTranslationValue(x, y, t):
             GPIO.output(c2a, GPIO.HIGH)
             GPIO.output(c2b, GPIO.LOW)
             GPIO.output(c2, GPIO.HIGH)
-            pwmc2.ChangeDutyCycle(t*70)
+            pwmc2.ChangeDutyCycle(t*y*100)
 
             GPIO.output(ccw1a, GPIO.LOW)
             GPIO.output(ccw1b, GPIO.HIGH)
@@ -211,7 +214,7 @@ def setTranslationValue(x, y, t):
             GPIO.output(ccw2a, GPIO.LOW)
             GPIO.output(ccw2b, GPIO.HIGH)
             GPIO.output(ccw2, GPIO.HIGH)
-            pwmccw2.ChangeDutyCycle(t*70)     
+            pwmccw2.ChangeDutyCycle(t*y*100)     
 
 
 # joystick input values converted to electrical output
@@ -241,7 +244,8 @@ while True:
 
     setThrottleValue(leftJoyY)
     setRotateValue(leftJoyX, leftJoyY)
-    setTranslationValue(rightJoyX, rightJoyY, leftJoyY)
+    if (rightJoyX + rightJoyY) != 0:
+        setTranslationValue(rightJoyX, rightJoyY, leftJoyY)
 
 
 print("program was quit")
