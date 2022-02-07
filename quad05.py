@@ -31,40 +31,40 @@ def setThrottleValue(t):
 
 def setRotateValue(x, t):
     if x<0:
-        c1.forward(1)
-        c2.forward(1)
-        ccw1.backward(0.7)
-        ccw2.backward(0.7)
+        c1.forward(t)
+        c2.forward(t)
+        ccw1.backward(t*abs(x))
+        ccw2.backward(t*abs(x))
     elif x>0:
-        c1.forward(0.7)
-        c2.forward(0.7)
-        ccw1.backward(1)
-        ccw2.backward(1)
+        c1.forward(t*x)
+        c2.forward(t*x)
+        ccw1.backward(t)
+        ccw2.backward(t)
 
 
 def setTranslationValue(x, y, t):
     if abs(x) > abs(y):
         if x > 0:
-            c1.forward(0.7)
-            c2.forward(1)
-            ccw1.backward(1)
-            ccw2.backward(0.7)
+            c1.forward(t*x)
+            c2.forward(t)
+            ccw1.backward(t)
+            ccw2.backward(t*x)
         elif x < 0:
-            c1.forward(1)
-            c2.forward(0.7)
-            ccw1.backward(0.7)
-            ccw2.backward(1)
+            c1.forward(t)
+            c2.forward(t*abs(x))
+            ccw1.backward(t*abs(x))
+            ccw2.backward(t)
     elif abs(x) < abs(y):
         if y > 0:
-            c1.forward(0.7)
-            c2.forward(1)
-            ccw1.backward(0.7)
-            ccw2.backward(1)
+            c1.forward(t*y)
+            c2.forward(t)
+            ccw1.backward(t*y)
+            ccw2.backward(t)
         elif y < 0:
-            c1.forward(1)
-            c2.forward(0.7)
-            ccw1.backward(1)
-            ccw2.backward(0.7)    
+            c1.forward(t)
+            c2.forward(t*abs(y))
+            ccw1.backward(t)
+            ccw2.backward(t*abs(y))    
 
 
 # joystick input values converted to electrical output
