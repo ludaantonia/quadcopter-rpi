@@ -96,22 +96,22 @@ def setRotateValue(x, t):
         GPIO.output(ccw1a, GPIO.LOW)
         GPIO.output(ccw1b, GPIO.HIGH)
         GPIO.output(ccw1, GPIO.HIGH)
-        pwmccw1.ChangeDutyCycle(t*70)
+        pwmccw1.ChangeDutyCycle(t*x*100)
 
         GPIO.output(ccw2a, GPIO.LOW)
         GPIO.output(ccw2b, GPIO.HIGH)
         GPIO.output(ccw2, GPIO.HIGH)
-        pwmccw2.ChangeDutyCycle(t*70)
+        pwmccw2.ChangeDutyCycle(t*x*100)
     elif x>0:
         GPIO.output(c1a, GPIO.HIGH)
         GPIO.output(c1b, GPIO.LOW)
         GPIO.output(c1, GPIO.HIGH)
-        pwmc1.ChangeDutyCycle(t*70)
+        pwmc1.ChangeDutyCycle(t*x*100)
 
         GPIO.output(c2a, GPIO.HIGH)
         GPIO.output(c2b, GPIO.LOW)
         GPIO.output(c2, GPIO.HIGH)
-        pwmc2.ChangeDutyCycle(t*70)
+        pwmc2.ChangeDutyCycle(t*x*100)
 
         GPIO.output(ccw1a, GPIO.LOW)
         GPIO.output(ccw1b, GPIO.HIGH)
